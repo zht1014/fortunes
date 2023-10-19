@@ -29,7 +29,19 @@ jobs:
         env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with: 
-          payload-file-path: "./payload-slack-content.json"
+          loadmessage: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New request",
+                    "emoji": true
+                  }
+                }
+              ]
+            }
         
 
         
