@@ -9,7 +9,7 @@ on:
 
 jobs:
     my_first_cl:
-    name: my_first_cl
+        name: my_first_cl
         runs-on: ubuntu-latest
         steps:
         - name: check out
