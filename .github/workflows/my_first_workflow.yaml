@@ -29,7 +29,7 @@ jobs:
         env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with: 
-          loadmessage: |
+          payload: |
             {
               "blocks": [
                 {
