@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: check out
-        uses: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: Check tag format
-        run: |
+      run: |
         if [[ "${{ github.ref }}" =~ ^refs/tags/v[0-9]+\.[0-9]+$ ]]; then
             echo "Tag format is valid"
         else
@@ -24,18 +24,18 @@ jobs:
         fi
 
     - name: Check commit message
-        run: |
+      run: |
         if [[ "$(git log --format=%s -n 1)" =~ ^#NORUN.*$ ]]; then
             echo "Commit message starts with #NORUN, exiting..."
             exit 78
         fi
 
     - name: Build an image from Dockerfile
-        run: |
+      run: |
           docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
-        - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
           image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
