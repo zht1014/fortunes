@@ -36,12 +36,12 @@ jobs:
           severity: 'CRITICAL,HIGH'
           output: 'trivy-output.txt'
           
-      - name: Send Failure notification
-        if: always() && (steps.scan.outcome == 'failure')
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_MESSAGE: 'Failed trivy scan'
+      # - name: Send Failure notification
+      #   if: always() && (steps.scan.outcome == 'failure')
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_MESSAGE: 'Failed trivy scan'
 
       - name: Upload fail report
         if: always() && (steps.scan.outcome == 'failure')
@@ -49,7 +49,7 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: ${{ steps.scan.output.file_path }}
+          file_path: ${{ steps.scan.outputs.file_path}}
           title: 'Trivy Scan Results'
           initial_comment: 'post by slack-upload-file'
 
