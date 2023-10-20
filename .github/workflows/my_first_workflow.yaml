@@ -50,9 +50,9 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          content: ${{steps.scan.outputs}}
+          file_path: ${{ steps.scan.output.file_path}}
           file_type: 'text'
-          file_name: 'text.txt'
+          file_name: 'trivy-output.txt'
           title: 'title of file'
           initial_comment: 'post by slack-upload-file'
           # file_path: ${{ steps.scan.outputs.file_path}}
