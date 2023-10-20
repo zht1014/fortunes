@@ -36,6 +36,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           output: 'trivy-output.txt'
           
+          
       # - name: Send Failure notification
       #   if: always() && (steps.scan.outcome == 'failure')
       #   uses: rtCamp/action-slack-notify@v2
@@ -49,7 +50,7 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          content: 'file content'
+          content: ${{steps.scan.outputs}}
           file_type: 'text'
           file_name: 'text.txt'
           title: 'title of file'
