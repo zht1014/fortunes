@@ -42,7 +42,6 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: 'Failed trivy scan'
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         
 
       - name: Set up QEMU
