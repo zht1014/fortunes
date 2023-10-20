@@ -42,12 +42,16 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: 'Failed trivy scan'
-        # uses: slackapi/slack-github-action@v1.24.0
-        # env:
-        #   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        #   SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        # with: 
-        #   payload-file-path: "./payload-slack-content.json"
+
+      - name: Upload fail report
+        if: always() && (steps.scan.outcome == 'failure')
+        uses: MeilCli/slack-upload-file@v3
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          file: 'trivy-output.txt'
+          title: 'trivy-output'
+          initial_comment: 'post by slack-upload-file'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
