@@ -2,41 +2,44 @@
 	"channel": "C123ABC456",
 	"text": " ",
 	"blocks": [
-		  {
-			  "type": "header",
-			  "text": {
-				  "type": "plain_text",
-				  "text": "New request"
-			  }
-		  },
-		  {
-			  "type": "section",
-			  "fields": [
-				  {
-					  "type": "mrkdwn",
-					  "text": "*Type:*\nPaid Time Off"
-				  },
-				  {
-					  "type": "mrkdwn",
-					  "text": "*Created by:*\n<example.com|Fred Enriquez>"
-				  }
-			  ]
-		  },
-		  {
-			  "type": "section",
-			  "fields": [
-				  {
-					  "type": "mrkdwn",
-					  "text": "*When:*\nAug 10 - Aug 13"
-				  }
-			  ]
-		  },
-		  {
-			  "type": "section",
-			  "text": {
-				  "type": "mrkdwn",
-				  "text": "<https://example.com|View request>"
-			  }
-		  }
-	  ]
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "image",
+					"image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+					"alt_text": "cute cat"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "approved this message."
+				}
+			]
+		},
+		{
+			"type": "section",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*Ref:*\nrefs/heads/v1.0"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Event:*\npush"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Actions URL:*\nfortune"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Commit:*\n6a5392"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Scan failed:*\nFailed trivy scan, see uploaded report"
+				}
+			]
+		}
+	]
   }
