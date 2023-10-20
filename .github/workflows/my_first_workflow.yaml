@@ -37,17 +37,17 @@ jobs:
           output: 'trivy-output.txt'
 
       - name: Send Failure notification
-        if: failure()
-        # uses: rtCamp/action-slack-notify@v2
-        # env:
-        #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-        #   SLACK_MESSAGE: 'Failed trivy scan'
-        uses: slackapi/slack-github-action@v1.24.0
+        if: always() && (steps.scan.outcome == failure())
+        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        with: 
-          payload-file-path: "./payload-slack-content.json"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: 'Failed trivy scan'
+        # uses: slackapi/slack-github-action@v1.24.0
+        # env:
+        #   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        #   SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        # with: 
+        #   payload-file-path: "./payload-slack-content.json"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
