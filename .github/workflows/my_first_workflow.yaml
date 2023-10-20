@@ -28,12 +28,12 @@ jobs:
         id: scan
         uses: aquasecurity/trivy-action@master
         with:
-          sacn-type: 'fs'
-          scan-ref: '.'
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
-          severity: 'CRITICAL'
-          output: 'trivy-output.txt'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
       - name: Send Failure notification
         if: always() && (steps.sacn.outcome == 'failure')
