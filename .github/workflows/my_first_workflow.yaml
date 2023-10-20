@@ -35,9 +35,10 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: 'trivy-output.txt'
+          
 
       - name: Send Failure notification
-        if: always() && (steps.scan.outcome == failure())
+        if: always() && (steps.scan.outcome == 'failure')
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
