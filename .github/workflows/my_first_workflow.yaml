@@ -34,7 +34,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          output: 'fortunes.txt'
+          output: 'trivy-output.txt'
           
           
       # - name: Send Failure notification
@@ -50,7 +50,7 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: ${{ steps.scan.output.file_path}}
+          file_path: '.\trivy-output.txt'
           file_type: 'text'
           file_name: 'trivy-output.txt'
           title: 'title of file'
