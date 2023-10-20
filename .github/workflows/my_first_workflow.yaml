@@ -29,16 +29,13 @@ jobs:
         with:
           sacn-type: 'fs'
           scan-ref: ','
-          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
           severity: 'HIGH'
+          output: 'trivy-output.txt'
 
       - name: Send Failure notification
         if: always() && (steps.sacn.outcome == 'failure')
-        id: slack
         uses: slackapi/slack-github-action@v1.24.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
