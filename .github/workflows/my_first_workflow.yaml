@@ -29,10 +29,10 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           sacn-type: 'fs'
-          scan-ref: ','
+          scan-ref: '.'
           format: 'table'
           exit-code: '1'
-          severity: 'HIGH'
+          severity: 'CRITICAL,HIGH'
           output: 'trivy-output.txt'
 
       - name: Send Failure notification
