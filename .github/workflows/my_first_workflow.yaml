@@ -49,9 +49,14 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: ${{ steps.scan.outputs.file_path}}
-          title: 'Trivy Scan Results'
+          content: 'file content'
+          file_type: 'text'
+          file_name: 'text.txt'
+          title: 'title of file'
           initial_comment: 'post by slack-upload-file'
+          # file_path: ${{ steps.scan.outputs.file_path}}
+          # title: 'Trivy Scan Results'
+          # initial_comment: 'post by slack-upload-file'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
