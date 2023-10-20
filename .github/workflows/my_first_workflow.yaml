@@ -49,8 +49,8 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file: trivy-output.txt
-          title: 'trivy-output'
+          file_path: ${{ steps.scan.output.file_path }}
+          title: 'Trivy Scan Results'
           initial_comment: 'post by slack-upload-file'
 
       - name: Set up QEMU
