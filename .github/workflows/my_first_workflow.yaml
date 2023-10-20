@@ -29,12 +29,14 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          scan-type: 'fs'
+          scan-ref: '.'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          #output: 'trivy-output.txt'
+          output: 'trivy-output.txt'
           
           
       # - name: Send Failure notification
@@ -55,9 +57,6 @@ jobs:
           file_name: 'trivy-output.txt'
           title: 'title of file'
           initial_comment: 'post by slack-upload-file'
-          # file_path: ${{ steps.scan.outputs.file_path}}
-          # title: 'Trivy Scan Results'
-          # initial_comment: 'post by slack-upload-file'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
