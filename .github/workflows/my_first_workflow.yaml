@@ -58,8 +58,10 @@ jobs:
       #     title: 'title of file'
       #     initial_comment: 'post by slack-upload-file'
 
-      - run: echo "Test file " > trivy-output.txt
+      - if: always() && (steps.scan.outcome == 'failure')
+        run: echo "Test file " > trivy-output.txt
       - name: Upload to slack step
+        if: always() && (steps.scan.outcome == 'failure')
         uses: adrey/slack-file-upload-action@master
         with:
           token: ${{ secrets.SLACK_TOKEN }}
