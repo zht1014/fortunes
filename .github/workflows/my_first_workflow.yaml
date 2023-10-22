@@ -98,6 +98,7 @@ jobs:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
           TAGS: ${{ steps.docker_meta.outputs.tags }}
         run: cosign sign --yes "${TAGS}@${DIGEST}"
+        
 
       
         
