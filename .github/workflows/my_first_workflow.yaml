@@ -6,15 +6,17 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    # environment: 
-    #   name: production
-    permissions: {}
+    permissions:
+      contents: read
+      packages: write
+      id-token: write # needed for signing the images with GitHub OIDC Token
+
     steps:
 
-      # - name: Install Cosign
-      #   uses: sigstore/cosign-installer@v3.1.1
-      # - name: Check install!
-      #   run: cosign version
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.1
+      - name: Check install!
+        run: cosign version
 
 
       - name: Checkout code
@@ -77,12 +79,27 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - id: docker_meta
+        uses: docker/metadata-action@v4.4.0
+        with:
+          images: ghcr.io/sigstore/sample-honk
+          tags: type=sha,format=long
       
       - name: Build and push
+        id: build-and-push
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: madridboi/madridboi:latest
+
+      - name: Sign the images with GitHub OIDC Token
+        env:
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+          TAGS: ${{ steps.docker_meta.outputs.tags }}
+        run: cosign sign --yes "${TAGS}@${DIGEST}"
+
+      
         
 
         
