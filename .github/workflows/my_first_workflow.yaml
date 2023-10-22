@@ -91,14 +91,15 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: madridboi/madridboi:latest
+          #tags: madridboi/madridboi:latest
+          tags: ${{ steps.docker_meta.outputs.tags }}
 
       - name: Sign the images with GitHub OIDC Token
         env:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
           TAGS: ${{ steps.docker_meta.outputs.tags }}
         run: cosign sign --yes "${TAGS}@${DIGEST}"
-        
+
 
       
         
