@@ -37,7 +37,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL'
+          severity: 'HIGH'
           output: 'trivy-output.txt'
           
           
@@ -48,17 +48,17 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: 'Failed trivy scan'
 
-      - name: Upload fail report
-        if: always() && (steps.scan.outcome == 'failure')
-        uses: MeilCli/slack-upload-file@v3
-        with:
-          slack_token: ${{ secrets.SLACK_TOKEN }}
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: '$PWD/trivy-output.txt'
-          file_type: 'text'
-          file_name: 'trivy-output.txt'
-          title: 'title of file'
-          initial_comment: 'post by slack-upload-file'
+      # - name: Upload fail report
+      #   if: always() && (steps.scan.outcome == 'failure')
+      #   uses: MeilCli/slack-upload-file@v3
+      #   with:
+      #     slack_token: ${{ secrets.SLACK_TOKEN }}
+      #     channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+      #     file_path: '$PWD/trivy-output.txt'
+      #     file_type: 'text'
+      #     file_name: 'trivy-output.txt'
+      #     title: 'title of file'
+      #     initial_comment: 'post by slack-upload-file'
 
       - name: Upload to slack step
         if: always() && (steps.scan.outcome == 'failure')
