@@ -40,7 +40,6 @@ jobs:
           severity: 'HIGH'
           output: 'trivy-output.txt'
           
-          
       - name: Send Failure notification
         if: always() && (steps.scan.outcome == 'failure')
         uses: rtCamp/action-slack-notify@v2
