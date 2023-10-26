@@ -104,7 +104,12 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_MESSAGE: 'Image built and signed\nName: ZHANG HAOTIAN\nMatriculation: A0287258M\nEmail: e1285204@u.nus.edu\ngithub:https://github.com/zht1014/fortunes\nDocker: https://hub.docker.com/repository/docker/madridboi/madridboi'
+          SLACK_MESSAGE: "*Image built and signed*\n
+                          *Name:* ZHANG HAOTIAN\n
+                          *Matriculation:* A0287258M\n
+                          *Email:* e1285204@u.nus.edu\n
+                          *Git:* https://github.com/zht1014/fortunes\n
+                          *Docker:* https://hub.docker.com/repository/docker/madridboi/madridboi"
 
 
       
